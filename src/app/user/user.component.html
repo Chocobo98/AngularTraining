@@ -1,6 +1,8 @@
 <div>
-    <button>
-        <img />
-        <span>NAME</span>
-    </button>
+  <button (click)="onSelectUser()">
+    <!--Property Binding (Dynamic)-->
+    <img [src]="imagePath" [alt]="selectedUser.name" />
+    <!-- String Interpolation (Allow you to put any property or js stuff inside the {{ }} )-->
+    <span>{{ selectedUser.name }}</span>
+  </button>
 </div>
