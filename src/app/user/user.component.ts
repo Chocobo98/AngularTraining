@@ -16,6 +16,20 @@ import {
 // Output: Component Outputs
 // output: Event Emitter simpler
 
+// type User = {
+//   //Alias, a object type to make easier your properties type
+//   id: string;
+//   avatar: string;
+//   name: string;
+// };
+
+//Same as Alias
+interface User {
+  id: string;
+  avatar: string;
+  name: string;
+}
+
 @Component({
   selector: 'app-user',
   standalone: true,
@@ -24,9 +38,11 @@ import {
   styleUrl: './user.component.css',
 })
 export class UserComponent {
-  @Input({ required: true }) id!: string;
-  @Input({ required: true }) avatar!: string; // <-- Typescript just ommit this "error" because will know this value will be set somewhere else
-  @Input({ required: true }) name!: string; //Inputs are properties in our component, but attributes in our selector
+  // @Input({ required: true }) id!: string;
+  // @Input({ required: true }) avatar!: string; // <-- Typescript just ommit this "error" because will know this value will be set somewhere else
+  // @Input({ required: true }) name!: string; //Inputs are properties in our component, but attributes in our selector
+
+  @Input({ required: true }) user!: User;
   @Output() clickOnUser = new EventEmitter<string>();
 
   // avatar = input.required<string>();
@@ -34,14 +50,14 @@ export class UserComponent {
   // clickOnUser = output<string>();
 
   get imagePath() {
-    return 'assets/users/' + this.avatar;
+    return 'assets/users/' + this.user.avatar;
   }
   // imagePath = computed(() => {
   //   return 'assets/users/' + this.avatar();
   // });
 
   onSelectedUser() {
-    this.clickOnUser.emit(this.id); //Important,with this you're sending back a value to the parent component (In this case, AppComponent). So from its class you can do whatever you want with that value
+    this.clickOnUser.emit(this.user.id); //Important,with this you're sending back a value to the parent component (In this case, AppComponent). So from its class you can do whatever you want with that value
   }
 }
 

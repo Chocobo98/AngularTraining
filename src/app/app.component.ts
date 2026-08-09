@@ -17,7 +17,7 @@ export class AppComponent {
 
   selectedUserName = computed(() =>
     this.users.find((element) => element.id === this.singleUserId()),
-  )!;
+  );
 
   // get selectedUserName() {
   //   return this.users.find(user => user.id === this.selectedUserId)!;
