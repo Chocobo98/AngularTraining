@@ -1,19 +1,28 @@
 <app-header></app-header>
 <main>
   <ul id="users">
-    <li>
-      <app-user [user]="users[0]" (clickOnUser)="onSelectedUser($event)" />
+    <!-- @for (user of users; track user.id) { -->
+    <!-- Structural Directives -->
+    <li *ngFor="let user of users">
+      <app-user [user]="user" (clickOnUser)="onSelectedUser($event)" />
     </li>
-    <li>
-      <app-user [user]="users[1]" (clickOnUser)="onSelectedUser($event)" />
-    </li>
-    <li>
-      <app-user [user]="users[2]" (clickOnUser)="onSelectedUser($event)" />
-    </li>
-    <li>
-      <app-user [user]="users[3]" (clickOnUser)="onSelectedUser($event)" />
-    </li>
+    <!-- } -->
   </ul>
 
-  <app-tasks [name]="selectedUserName() ? selectedUserName()?.name : ''" />
+  <!-- @if (selectedUserName()?.name != "") {
+    <app-tasks [name]="selectedUserName()?.name" />
+  } @else {
+    <p id="fallback">Selected a user to see their tasks!</p>
+  } -->
+
+  <!-- @if (singleUserId) { -->
+  <app-tasks
+    *ngIf="singleUserId; else fallback"
+    [name]="selectedUserName!.name"
+  ></app-tasks>
+  <!-- } @else { -->
+  <ng-template #fallback>
+    <p id="fallback">Please select a user to check their tasks!</p>
+  </ng-template>
+  <!-- } -->
 </main>
