@@ -1,4 +1,20 @@
-import { Component, Input } from '@angular/core';
+import {
+  Component,
+  computed,
+  EventEmitter,
+  Input,
+  input,
+  Output,
+  output,
+} from '@angular/core';
+
+//Inputs
+// Import "Input": Component Inputs
+// Import "input": Signals Inputs
+
+// Outputs
+// Output: Component Outputs
+// output: Event Emitter simpler
 
 @Component({
   selector: 'app-user',
@@ -7,14 +23,25 @@ import { Component, Input } from '@angular/core';
   templateUrl: './user.component.html',
   styleUrl: './user.component.css',
 })
-
 export class UserComponent {
+  @Input({ required: true }) id!: string;
+  @Input({ required: true }) avatar!: string; // <-- Typescript just ommit this "error" because will know this value will be set somewhere else
+  @Input({ required: true }) name!: string; //Inputs are properties in our component, but attributes in our selector
+  // @Output() select = new EventEmitter();
 
-  @Input() avatar!: string; //! <-- Typescript just ommit this "error" because will know this value will be set somewhere else
-  @Input() name!: string; //Inputs are properties in our component, but attributes in our selector
+  // avatar = input.required<string>();
+  // name = input<string>('Vacant');
+  clickOnUser = output<string>();
 
-   get imagePath() {
+  get imagePath() {
     return 'assets/users/' + this.avatar;
+  }
+  // imagePath = computed(() => {
+  //   return 'assets/users/' + this.avatar();
+  // });
+
+  onSelectedUser() {
+    this.clickOnUser.emit(this.id); //Important,with this you're sending back a value to the parent component (In this case, AppComponent). So from its class you can do whatever you want with that value
   }
 }
 
@@ -40,3 +67,5 @@ export class UserComponent {
 // use Zone.Js, thats check in a "zone" when a value or state has been changed.
 //
 // Long short story, State management -> Check and listen EVERY possible event; Signal -> Just the check values you linked them, reevalute the UI and renderized again
+// When you're using Inputs, Components Inputs will be declared as Properties and been called as Properties in HTML templates
+// But with Signal Components, will be called as Functions

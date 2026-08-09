@@ -1,7 +1,8 @@
 <div>
-  <button>
+  <button (click)="onSelectedUser()">
     <!--Property Binding (Dynamic)-->
     <!-- Changed for Signals and now it needs consider as a function-->
+    <!-- Change back to Property Binding  due Components INputs (This will be a pain in the ass)-->
     <img [src]="imagePath" [alt]="name" />
     <!-- String Interpolation (Allows you to put any property or js stuff inside the {{ }} )-->
     <span>{{ name }}</span>
