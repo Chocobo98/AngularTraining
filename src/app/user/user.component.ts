@@ -27,11 +27,11 @@ export class UserComponent {
   @Input({ required: true }) id!: string;
   @Input({ required: true }) avatar!: string; // <-- Typescript just ommit this "error" because will know this value will be set somewhere else
   @Input({ required: true }) name!: string; //Inputs are properties in our component, but attributes in our selector
-  // @Output() select = new EventEmitter();
+  @Output() clickOnUser = new EventEmitter<string>();
 
   // avatar = input.required<string>();
   // name = input<string>('Vacant');
-  clickOnUser = output<string>();
+  // clickOnUser = output<string>();
 
   get imagePath() {
     return 'assets/users/' + this.avatar;
