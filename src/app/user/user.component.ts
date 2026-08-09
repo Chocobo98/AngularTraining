@@ -7,6 +7,7 @@ import {
   Output,
   output,
 } from '@angular/core';
+import { User } from './user.model';
 
 //Inputs
 // Import "Input": Component Inputs
@@ -15,20 +16,6 @@ import {
 // Outputs
 // Output: Component Outputs
 // output: Event Emitter simpler
-
-// type User = {
-//   //Alias, a object type to make easier your properties type
-//   id: string;
-//   avatar: string;
-//   name: string;
-// };
-
-//Same as Alias
-interface User {
-  id: string;
-  avatar: string;
-  name: string;
-}
 
 @Component({
   selector: 'app-user',
