@@ -1,5 +1,5 @@
 <div>
-  <button (click)="onSelectedUser()">
+  <button [class.active]="selected" (click)="onSelectedUser()">
     <!--Property Binding (Dynamic)-->
     <!-- Changed for Signals and now it needs consider as a function-->
     <!-- Change back to Property Binding  due Components INputs (This will be a pain in the ass)-->

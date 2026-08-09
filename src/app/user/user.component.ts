@@ -30,6 +30,7 @@ export class UserComponent {
   // @Input({ required: true }) name!: string; //Inputs are properties in our component, but attributes in our selector
 
   @Input({ required: true }) user!: User;
+  @Input({ required: true }) selected!: boolean;
   @Output() clickOnUser = new EventEmitter<string>();
 
   // avatar = input.required<string>();

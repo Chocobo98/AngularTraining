@@ -4,7 +4,11 @@
     @for (user of users; track user.id) {
       <!-- Structural Directives -->
       <li>
-        <app-user [user]="user" (clickOnUser)="onSelectedUser($event)" />
+        <app-user
+          [selected]="user.id === singleUserId"
+          [user]="user"
+          (clickOnUser)="onSelectedUser($event)"
+        />
       </li>
     }
   </ul>
