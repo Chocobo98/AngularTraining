@@ -1,4 +1,4 @@
-<div>
+<app-card>
   <button [class.active]="selected" (click)="onSelectedUser()">
     <!--Property Binding (Dynamic)-->
     <!-- Changed for Signals and now it needs consider as a function-->
@@ -7,4 +7,4 @@
     <!-- String Interpolation (Allows you to put any property or js stuff inside the {{ }} )-->
     <span>{{ user.name }}</span>
   </button>
-</div>
+</app-card>
