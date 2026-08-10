@@ -1,6 +1,7 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Output, inject, Input } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { NewTaskData } from '../task/task.model';
+import { TasksService } from '../tasks.service';
 
 @Component({
   selector: 'app-new-task',
@@ -10,13 +11,14 @@ import { NewTaskData } from '../task/task.model';
   styleUrl: './new-task.component.css',
 })
 export class NewTaskComponent {
-  @Output() cancelTask = new EventEmitter();
-  @Output() add = new EventEmitter<NewTaskData>();
+  @Input({ required: true }) userId!: string;
+  @Output() close = new EventEmitter();
 
   //Two Way Binding with Directives
   taskTitle = '';
   taskSummary = '';
   taskDate = '';
+  private tasksService = inject(TasksService);
 
   //Two Way Binding with Signal
   // taskTitle = signal('');
@@ -25,15 +27,19 @@ export class NewTaskComponent {
 
   // Any of those didn't change the syntax in the template
 
-  OnCancelTask() {
-    this.cancelTask.emit();
+  OnCloseTask() {
+    this.close.emit();
   }
 
   OnSubmit() {
-    this.add.emit({
-      title: this.taskTitle,
-      summary: this.taskSummary,
-      date: this.taskDate,
-    });
+    this.tasksService.addTask(
+      {
+        title: this.taskTitle,
+        summary: this.taskSummary,
+        date: this.taskDate,
+      },
+      this.userId,
+    );
+    this.close.emit();
   }
 }
